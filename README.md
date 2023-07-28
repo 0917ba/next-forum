@@ -1,1 +1,3 @@
-# 익명게시판 만들기 w/ Next.js 13
+# Next-Community
+Next.js + Firebase로 만든 커뮤니티 게시판
+
