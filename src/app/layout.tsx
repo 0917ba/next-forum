@@ -1,4 +1,4 @@
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/page/NavBar";
 import "./globals.css";
 import { Noto_Sans_KR } from "next/font/google";
 import AuthSession from "@/components/AuthSession";

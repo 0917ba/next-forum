@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import UserLogoutBtn from "./UserLogoutBtn";
+import UserLogoutBtn from "../UserLogoutBtn";
+import CoolLink from "../ui/CoolLink";
 
 export default async function NavBar() {
   const session = await getServerSession();
@@ -19,12 +20,7 @@ export default async function NavBar() {
         {session?.user ? (
           <UserLogoutBtn />
         ) : (
-          <Link
-            href="/signin"
-            className=" flex h-8 w-16 items-center justify-center rounded-md bg-zinc-900"
-          >
-            <div className="text-sm font-light text-white">로그인</div>
-          </Link>
+          <CoolLink href="signin">로그인</CoolLink>
         )}
       </div>
     </div>
