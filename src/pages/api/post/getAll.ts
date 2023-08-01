@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { collection, getDocs } from 'firebase/firestore';
-import db from '@/lib/config';
+import { NextApiRequest, NextApiResponse } from "next";
+import { collection, getDocs } from "firebase/firestore";
+import db from "@/lib/db";
 
 type post = {
   id: string;
@@ -11,10 +11,10 @@ type post = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
-  if (req.method === 'GET') {
-    const posts = await getDocs(collection(db, 'posts'));
+  if (req.method === "GET") {
+    const posts = await getDocs(collection(db, "posts"));
     const postsList: post[] = [];
 
     posts.forEach((post) => {
@@ -29,6 +29,6 @@ export default async function handler(
 
     return res.status(200).json({ postsList });
   } else {
-    return res.status(405).json({ message: 'Method not allowed' });
+    return res.status(405).json({ message: "Method not allowed" });
   }
 }

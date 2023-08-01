@@ -1,6 +1,7 @@
 import NavBar from "@/components/NavBar";
 import "./globals.css";
 import { Noto_Sans_KR } from "next/font/google";
+import AuthSession from "@/components/AuthSession";
 
 const noto_sans_kr = Noto_Sans_KR({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -8,16 +9,27 @@ const noto_sans_kr = Noto_Sans_KR({
   display: "swap",
 });
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+  authModal,
+}: {
+  children: React.ReactNode;
+  authModal: React.ReactNode;
+}) {
   return (
     <html lang="ko" className={noto_sans_kr.className}>
       <body className="light bg-slate-50 text-slate-900 antialiased">
-        <header>
-          <nav>
-            <NavBar />
-          </nav>
-        </header>
-        <main className="pt-14">{children}</main>
+        <AuthSession>
+          <header>
+            <nav>
+              <NavBar />
+            </nav>
+          </header>
+          <main className="pt-14">
+            {authModal}
+            {children}
+          </main>
+        </AuthSession>
       </body>
     </html>
   );
