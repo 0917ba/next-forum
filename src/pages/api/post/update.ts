@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   if (req.method === "POST") {
-    const { id, title, author, content } = req.body;
+    const { id, title, author, data } = req.body;
     const db = (await connectDB).db("forum");
     console.log(id);
     await db.collection("posts").updateOne(
@@ -14,7 +14,7 @@ export default async function handler(
       {
         $set: {
           title,
-          content,
+          data,
           author,
         },
       },

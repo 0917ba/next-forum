@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className={noto_sans_kr.className}>
-      <body className="light bg-slate-50 text-slate-900 antialiased">
+      <body className="light overflow-y-scroll bg-slate-50 text-slate-900 antialiased ">
         <AuthSession>
           <header>
             <nav>
