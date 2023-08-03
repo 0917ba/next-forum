@@ -15,11 +15,11 @@ export default async function Page() {
   const posts = await db.collection("posts").find().toArray();
 
   return (
-    <div className="mx-16 h-max pt-4 md:mx-56">
+    <div className="mx-16 h-max pt-4 md:mx-60">
       <h1 className="mb-6 text-3xl font-semibold text-zinc-800">글 목록</h1>
       <div className="grid grid-cols-3 gap-3">
         <div className="col-span-3 min-h-[12rem] md:col-span-2">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3.5">
             {posts.map((post: Post) => (
               <Post key={post._id} post={post} />
             ))}

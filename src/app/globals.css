@@ -6,7 +6,11 @@
   padding-bottom: 200px !important;
 }
 
-img {
+.typography {
+  @apply text-base;
+}
+
+.typography img {
   margin-top: 16px !important;
   margin-bottom: 16px !important;
 }

@@ -13,17 +13,22 @@ type ParsedContent = string | JSX.Element;
 const EditorJsRenderer = ({ data, title }: Props) => {
   const html = EditorJsToHtml.parse(data) as ParsedContent[];
   return (
-    <div className="flex flex-col">
-      <h1 className="text-xl font-semibold">{title}</h1>
-      <div className="prose max-w-full" key={data.time}>
-        {html.map((item, index) => {
-          if (typeof item === "string") {
-            return (
-              <div dangerouslySetInnerHTML={{ __html: item }} key={index}></div>
-            );
-          }
-          return item;
-        })}
+    <div className="editor-cotainer typography ">
+      <div className="flex flex-col">
+        <h1 className="mb-0.5 text-xl font-semibold">{title}</h1>
+        <div className="max-w-full" key={data.time}>
+          {html.map((item, index) => {
+            if (typeof item === "string") {
+              return (
+                <div
+                  dangerouslySetInnerHTML={{ __html: item }}
+                  key={index}
+                ></div>
+              );
+            }
+            return item;
+          })}
+        </div>
       </div>
     </div>
   );

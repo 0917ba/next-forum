@@ -1,4 +1,4 @@
-import Code from "@editorjs/code";
+import CodeTool from "@editorjs/code";
 import Header from "@editorjs/header";
 import Paragraph from "@editorjs/paragraph";
 import Quote from "@editorjs/quote";
@@ -8,7 +8,7 @@ import SimpleImage from "@editorjs/simple-image";
 import Delimiter from "@editorjs/delimiter";
 
 const EDITOR_TOOLS = {
-  code: Code,
+  code: CodeTool,
   header: {
     class: Header,
     inlineToolbar: true,

@@ -39,7 +39,7 @@ const EditorBlock = ({ data, onChange, holder }: Props) => {
     };
   }, []);
 
-  return <div id={holder} className="prose max-w-full" />;
+  return <div id={holder} className="prose w-full" />;
 };
 
 export default memo(EditorBlock);

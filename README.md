@@ -43,3 +43,4 @@ Simple Forum Website in Next.js 13 & MongoDB & TailwindCSS <br /><br /><br />
 - https://github.com/joschan21/breadit - Inspired a lot here!
 - https://www.youtube.com/watch?v=mSUKMfmLAt0 - Design for above repository
 - https://nextjs.org/docs - Next.js Docs
+- https://reacthustle.com/blog/ultimate-guide-on-how-to-setup-editorjs-with-nextjs-12-typescript

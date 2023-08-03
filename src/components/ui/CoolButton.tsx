@@ -10,7 +10,7 @@ export default function CoolButton({
   return (
     <button
       onClick={onClick}
-      className="h-8 w-fit rounded-md bg-zinc-900 px-2 text-sm font-light text-white"
+      className="h-8 w-fit rounded-md bg-zinc-900 px-2.5 text-sm font-light text-white"
     >
       {children}
     </button>
