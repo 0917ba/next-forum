@@ -1,7 +1,7 @@
 import NavBar from "@/components/page/NavBar";
 import "./globals.css";
 import { Noto_Sans_KR } from "next/font/google";
-import AuthSession from "@/components/AuthSession";
+import AuthSession from "@/components/auth/AuthSession";
 
 const noto_sans_kr = Noto_Sans_KR({
   weight: ["100", "300", "400", "500", "700", "900"],

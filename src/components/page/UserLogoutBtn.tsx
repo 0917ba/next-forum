@@ -1,11 +1,16 @@
 "use client";
 
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 export default function UserLogoutBtn() {
   const onClick = () => {
     signOut();
   };
+  const { data } = useSession();
+  useEffect(() => {
+    console.log("data", data);
+  }, [data]);
   return (
     <button
       onClick={onClick}

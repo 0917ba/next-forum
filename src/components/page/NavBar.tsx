@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import UserLogoutBtn from "../UserLogoutBtn";
+import UserLogoutBtn from "./UserLogoutBtn";
 import CoolLink from "../ui/CoolLink";
+import { authOptions } from "@/lib/auth";
 
 export default async function NavBar() {
-  const session = await getServerSession();
-  // session에 있는 값: name, email, image
-  //console.log(session);
+  const session = await getServerSession(authOptions);
 
   return (
     <div className="fixed inset-x-0 top-0 z-[10] h-fit border-b border-zinc-300 bg-zinc-100 py-2">

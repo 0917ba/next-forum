@@ -1,5 +1,5 @@
 import { LogIn } from "lucide-react";
-import UserAuthForm from "./UserAuthForm";
+import SignInForm from "./SignInForm";
 
 export default function SignIn() {
   return (
@@ -7,7 +7,7 @@ export default function SignIn() {
       <LogIn />
       <h1 className="text-2xl font-semibold">로그인</h1>
       <p className="mb-3">먼저 로그인하세요!😊</p>
-      <UserAuthForm />
+      <SignInForm />
     </div>
   );
 }

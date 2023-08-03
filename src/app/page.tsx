@@ -1,29 +1,18 @@
 import Post from "@/components/post/Post";
-import Link from "next/link";
-import db from "@/lib/db";
-import { collection, getDocs } from "firebase/firestore";
 import CoolLink from "@/components/ui/CoolLink";
+import connectDB from "@/lib/database";
 
-type post = {
-  id: string;
+type Post = {
+  _id: any;
   title: string;
   content: string;
   author: string;
+  authorId: string;
 };
 
 export default async function Page() {
-  const posts = await getDocs(collection(db, "posts"));
-  const postsList: post[] = [];
-
-  posts.forEach((post) => {
-    const postData = post.data();
-    postsList.push({
-      id: post.id,
-      title: postData.title,
-      content: postData.content,
-      author: postData.author,
-    });
-  });
+  const db = (await connectDB).db("forum");
+  const posts = await db.collection("posts").find().toArray();
 
   return (
     <div className="mx-16 h-max pt-4 md:mx-56">
@@ -31,8 +20,8 @@ export default async function Page() {
       <div className="grid grid-cols-3 gap-3">
         <div className="col-span-3 min-h-[12rem] md:col-span-2">
           <div className="flex flex-col gap-3">
-            {postsList.map((post: any) => (
-              <Post key={post.id} post={post} />
+            {posts.map((post: Post) => (
+              <Post key={post._id} post={post} />
             ))}
           </div>
         </div>

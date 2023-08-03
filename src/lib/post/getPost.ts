@@ -1,8 +1,7 @@
-import { doc, getDoc } from "firebase/firestore";
-import db from "../db";
+import connectDB from "../database";
 
-export default async function getPost(id: string) {
-  const docRef = doc(db, "posts", id);
-  const editingPost = await getDoc(docRef);
-  return editingPost.data();
+export default async function getPost(_id: string) {
+  const db = (await connectDB).db("forum");
+  const result = await db.collection("posts").findOne({ _id });
+  return result;
 }
