@@ -42,7 +42,7 @@ export default function Write() {
       body: JSON.stringify({ title, author, data, authorId, _id: postId }),
     };
     await fetch("/api/post/new", formData);
-
+    router.refresh();
     router.push("/");
   };
 
@@ -85,7 +85,7 @@ export default function Write() {
               <h1 className="mb-3 text-3xl font-bold">미리보기</h1>
               <div className="mb-10 flex min-h-[12rem] justify-center rounded bg-white pb-8 pt-10 font-medium shadow">
                 <div className="w-fit min-w-[500px] max-w-2xl">
-                  <EditorJsRenderer data={data} title={title} />
+                  <EditorJsRenderer data={data} title={title} preview={true} />
                 </div>
               </div>
             </div>

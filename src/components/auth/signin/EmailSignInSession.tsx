@@ -21,8 +21,7 @@ export default function EmailSignInSession() {
       setEmail("");
       setPassword("");
     } else {
-      router.refresh();
-      router.push("/");
+      window.location.replace("/");
     }
   };
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {

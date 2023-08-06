@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import UserLogoutBtn from "./UserLogoutBtn";
-import CoolLink from "../ui/CoolLink";
 import { authOptions } from "@/lib/auth";
+import UserLoginBtn from "./UserLoginBtn";
 
 export default async function NavBar() {
   const session = await getServerSession(authOptions);
@@ -16,11 +16,7 @@ export default async function NavBar() {
         <div className="flex h-8 max-w-md grow items-center justify-start rounded-md bg-white px-2 md:max-w-xl ">
           <div className=" font-light text-zinc-700">검색</div>
         </div>
-        {session?.user ? (
-          <UserLogoutBtn />
-        ) : (
-          <CoolLink href="signin">로그인</CoolLink>
-        )}
+        {session?.user ? <UserLogoutBtn /> : <UserLoginBtn />}
       </div>
     </div>
   );

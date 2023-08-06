@@ -25,7 +25,7 @@ export default function RootLayout({
               <NavBar />
             </nav>
           </header>
-          <main className="pt-14">
+          <main className="py-14">
             {authModal}
             {children}
           </main>

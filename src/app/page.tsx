@@ -1,16 +1,21 @@
 import Post from "@/components/post/Post";
 import CoolLink from "@/components/ui/CoolLink";
+import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/database";
+import { getServerSession } from "next-auth";
 
 type Post = {
   _id: any;
   title: string;
-  content: string;
+  data: any;
   author: string;
   authorId: string;
+  vote: number;
+  comment: number;
 };
 
 export default async function Page() {
+  const session = await getServerSession(authOptions);
   const db = (await connectDB).db("forum");
   const posts = await db.collection("posts").find().toArray();
 
@@ -25,8 +30,9 @@ export default async function Page() {
             ))}
           </div>
         </div>
+
         <div className="col-span-1 hidden h-52 rounded-md bg-white shadow md:block">
-          <CoolLink href="write">글쓰기</CoolLink>
+          {session?.user && <CoolLink href="write">글쓰기</CoolLink>}
         </div>
       </div>
     </div>

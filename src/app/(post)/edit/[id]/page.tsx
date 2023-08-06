@@ -3,7 +3,7 @@
 import EditorJsRenderer from "@/components/post/EditorJsRenderer";
 import CoolButton from "@/components/ui/CoolButton";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { OutputData } from "@editorjs/editorjs";
 
 export default function Edit({ params }: { params: { id: string } }) {
@@ -26,7 +26,6 @@ export default function Edit({ params }: { params: { id: string } }) {
       setTitle(editingPost.title);
       setAuthor(editingPost.author);
       setData(editingPost.data);
-      const Editor = React.lazy(() => import("@/components/post/Editor"));
       setComponent(React.lazy(() => import("@/components/post/Editor")));
     })();
   }, []);
@@ -58,7 +57,7 @@ export default function Edit({ params }: { params: { id: string } }) {
       <div className="mt-4 flex w-full flex-col gap-3 px-4 md:px-52">
         <h1 className="mb-3 text-3xl font-bold">글쓰기</h1>
         <div className="mb-10 flex justify-center rounded bg-white px-4 pt-10 shadow">
-          <div className="mx-16 flex w-fit flex-col">
+          <div className="mx-16 flex w-[522.81px] flex-col">
             <div className="mb-2 w-fit">
               <input
                 className="text-2xl font-extrabold focus:outline-none"
@@ -79,11 +78,13 @@ export default function Edit({ params }: { params: { id: string } }) {
             </div>
             {Component && (
               <div className="editor-cotainer typography flex justify-center">
-                <Component
-                  data={data}
-                  onChange={setData}
-                  holder="editorjs-container"
-                />
+                <Suspense fallback={<div>로딩중...</div>}>
+                  <Component
+                    data={data}
+                    onChange={setData}
+                    holder="editorjs-container"
+                  />
+                </Suspense>
               </div>
             )}
           </div>
@@ -93,8 +94,8 @@ export default function Edit({ params }: { params: { id: string } }) {
             <div className="flex flex-col gap-3">
               <h1 className="mb-3 text-3xl font-bold">미리보기</h1>
               <div className="mb-10 flex min-h-[12rem] justify-center rounded bg-white pb-8 pt-10 font-medium shadow">
-                <div className="w-fit max-w-2xl">
-                  <EditorJsRenderer data={data} title={title} />
+                <div className="flex w-fit flex-1 justify-center">
+                  <EditorJsRenderer data={data} title={title} preview={true} />
                 </div>
               </div>
             </div>

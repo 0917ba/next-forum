@@ -5,21 +5,87 @@ import PostVote from "./PostVote";
 import CoolLink from "../ui/CoolLink";
 import { authOptions } from "@/lib/auth";
 import EditorJsRenderer from "./EditorJsRenderer";
+import connectDB from "@/lib/database";
+import ExtendedCommentBar from "./ExtendedCommentBar";
 
-export default async function Post({ post }: { post: any }) {
+type Post = {
+  _id: any;
+  title: string;
+  data: any;
+  author: string;
+  authorId: string;
+  vote: number;
+  comment: number;
+};
+
+export default async function Post({
+  post,
+  extended = false,
+}: {
+  post: Post;
+  extended?: boolean;
+}) {
   const session = await getServerSession(authOptions);
+  const db = (await connectDB).db("forum");
+
   const { _id, authorId, title, author, data } = post;
+  let voteCount = 0,
+    commentCount = 0;
+
+  // init vote count
+  async function initVoteCount() {
+    const votes = await db
+      .collection("votes")
+      .find({ postId: post._id })
+      .toArray();
+
+    votes.forEach((_vote: any) => {
+      voteCount += _vote.voteType;
+    });
+
+    await db.collection("posts").updateOne(
+      { _id },
+      {
+        $set: {
+          vote: voteCount,
+        },
+      },
+    );
+  }
+
+  // init comment count
+  async function initCommentCount() {
+    const comments = await db
+      .collection("comments")
+      .find({ postId: post._id })
+      .toArray();
+
+    comments.forEach((_comment: any) => {
+      commentCount += 1;
+    });
+
+    await db.collection("posts").updateOne(
+      { _id },
+      {
+        $set: {
+          comment: comments.length,
+        },
+      },
+    );
+  }
+
+  await Promise.all([initVoteCount(), initCommentCount()]);
 
   return (
-    <div className="flex flex-col flex-wrap content-between rounded-md bg-white shadow">
-      <div className="flex grow pr-2">
-        <PostVote />
+    <div className="flex flex-col content-between rounded-md bg-white shadow">
+      <div className="flex grow pr-4">
+        <PostVote postId={_id} initialVote={voteCount} />
         <div className="relative flex-1">
           <div className="my-5 flex flex-col content-between">
             <div className="mb-1 w-full text-sm">
               작성자: <span className="underline">{author}</span>
             </div>
-            <EditorJsRenderer data={data} title={title} />
+            <EditorJsRenderer data={data} title={title} id={_id} />
           </div>
           {session?.user._id === authorId && (
             <div className="absolute right-0 top-5 flex flex-none gap-1">
@@ -29,7 +95,11 @@ export default async function Post({ post }: { post: any }) {
           )}
         </div>
       </div>
-      <CommentBar />
+      {extended ? (
+        <ExtendedCommentBar postId={_id} />
+      ) : (
+        <CommentBar commentCount={commentCount} />
+      )}
     </div>
   );
 }

@@ -20,6 +20,7 @@ export default function EmailSignUpSession() {
       email,
       password,
     });
+    window.location.replace("/");
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {

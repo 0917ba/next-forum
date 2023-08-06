@@ -1,12 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
-import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import EmailSignInSession from "./EmailSignInSession";
 
 export default function SignInForm() {
   const [isEmailLogin, setIsEmailLogin] = useState(false);
+  const [prev, setPrev] = useState<string | null>(null);
+
+  const searchParams = useSearchParams();
 
   const onEmailLogin = () => {
     setIsEmailLogin(true);
@@ -14,6 +18,11 @@ export default function SignInForm() {
   const onGoogleLogin = async () => {
     await signIn("google", { callbackUrl: "/" });
   };
+
+  useEffect(() => {
+    const _prev = searchParams?.get("prev");
+    if (_prev) setPrev(_prev);
+  }, []);
 
   return (
     <div className="w-full">
@@ -35,7 +44,12 @@ export default function SignInForm() {
           </button>
           <div className="mt-3 text-sm">
             또는{" "}
-            <Link href="/signup">
+            <Link
+              href={{
+                pathname: "/signup",
+                query: { prev },
+              }}
+            >
               <span className="underline">가입하기</span>
             </Link>
           </div>

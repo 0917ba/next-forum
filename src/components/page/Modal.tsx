@@ -1,21 +1,16 @@
 "use client";
 
+import useInitialPath from "@/hooks/useInitialPath";
 import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default function Modal({ children }: { children: React.ReactNode }) {
-  const [prev, setPrev] = useState("/");
-
+  const initialPath = useInitialPath();
   const router = useRouter();
 
-  const onClick = () => router.push(prev);
-
-  useEffect(() => {
-    const previous = document.referrer;
-    const baseurl: string = process.env.NEXT_PUBLIC_URL || "";
-    setPrev(previous.replace(baseurl, ""));
-  }, []);
+  const onClick = () => {
+    router.push(initialPath);
+  };
 
   return (
     <div className="fixed inset-0 z-10 bg-zinc-900/20">

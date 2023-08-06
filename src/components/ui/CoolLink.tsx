@@ -6,7 +6,7 @@ export default function CoolLink({
   href,
 }: {
   children: React.ReactNode;
-  href: string;
+  href: any;
 }) {
   return (
     <Link
