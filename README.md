@@ -28,12 +28,12 @@ Simple Forum Website in Next.js 13 & MongoDB & TailwindCSS <br /><br /><br />
 - Discussion board (using MongoDB CRUD)
 - Beautiful Post Editor (using Editor.js)
 - Authentication using Email or Google
+- Comments, vote on post
 - ... and much more
 
 ## Features to be added...
 
 - User profile page
-- Comments, vote on post
 - Following user and Report user/post
 - Custom feed based on users following
 - Internationalization (EN, KO)
