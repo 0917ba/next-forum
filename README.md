@@ -34,7 +34,7 @@ Simple Forum Website in Next.js 13 & MongoDB & TailwindCSS <br /><br /><br />
 ## Features to be added...
 
 - User profile page
-- Following user and Report user/post
+- Following user and Reporting user/post
 - Custom feed based on users following
 - Internationalization (EN, KO)
 
