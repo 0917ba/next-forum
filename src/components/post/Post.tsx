@@ -16,6 +16,7 @@ type Post = {
   authorId: string;
   vote: number;
   comment: number;
+  createdAt: number;
 };
 
 export default async function Post({
@@ -28,7 +29,7 @@ export default async function Post({
   const session = await getServerSession(authOptions);
   const db = (await connectDB).db("forum");
 
-  const { _id, authorId, title, author, data } = post;
+  const { _id, authorId, title, author, data, createdAt } = post;
   let voteCount = 0,
     commentCount = 0;
 
@@ -81,10 +82,16 @@ export default async function Post({
       <div className="flex grow pr-4">
         <PostVote postId={_id} initialVote={voteCount} />
         <div className="relative flex-1">
-          <div className="my-5 flex flex-col content-between">
-            <div className="mb-1 w-full text-sm">
-              작성자: <span className="underline">{author}</span>
+          <div className="my-5 mb-0.5 flex flex-col content-between">
+            <div className='flex content-start gap-5'>
+              <div className="mb-2 text-sm">
+                작성자: <span className="underline">{author}</span>
+              </div>
+              <div className="mb-0.5 text-sm text-zinc-400">
+                <span>{`${new Date(createdAt).toLocaleString()}`}</span>
+              </div>
             </div>
+
             <EditorJsRenderer data={data} title={title} id={_id} />
           </div>
           {session?.user._id === authorId && (
