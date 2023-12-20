@@ -11,6 +11,7 @@ type Post = {
   authorId: string;
   vote: number;
   comment: number;
+  createdAt: number;
 };
 
 export default async function Page({ params }: { params: { id: string } }) {
