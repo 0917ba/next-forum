@@ -85,7 +85,7 @@ export default function Write() {
             <div className="flex flex-col gap-3">
               <h1 className="mb-3 text-3xl font-bold">미리보기</h1>
               <div className="mb-10 flex min-h-[12rem] justify-center rounded bg-white pb-8 pt-10 font-medium shadow">
-                <div className="min-w-[500px] max-w-2xl w-full">
+                <div className="min-w-[500px] max-w-2xl px-8 w-full">
                   <EditorJsRenderer data={data} title={title} preview={true} />
                 </div>
               </div>

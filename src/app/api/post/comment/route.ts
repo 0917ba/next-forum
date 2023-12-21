@@ -35,15 +35,16 @@ export async function DELETE(req: Request) {
     const db = (await connectDB).db("forum");
     const formData: any = await req.json();
 
-    const { commentId } = formData;
+    const { id } = formData;
 
-    if (!commentId)
+    if (!id)
       return new Response(
         JSON.stringify({ status: "error", message: "Comment id is required" }),
       );
 
+    // console.log(id);
     db.collection("comments").deleteOne({
-        id: commentId,
+        _id: id,
     });
 
     return new Response(JSON.stringify({ status: "ok" }));

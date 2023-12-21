@@ -12,12 +12,11 @@ export default function CommentDeleteBtn({ id }: { id: string }) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id }),
         };
-        await fetch("/api/post/delete", data);
+        await fetch("/api/post/comment", data);
         alert("삭제되었습니다.")
         router.refresh();
-        router.push("/");
         // refresh
-        location.reload();
+        // location.reload();
     };
     return <CoolButton onClick={onDelete}>삭제</CoolButton>;
 }
