@@ -3,7 +3,6 @@
 import { ChangeEvent, useState } from "react";
 import CoolButton from "../ui/CoolButton";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 type Props = {
   postId: string;

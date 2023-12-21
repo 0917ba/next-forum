@@ -3,6 +3,7 @@ import "./globals.css";
 import { Noto_Sans_KR } from "next/font/google";
 import AuthSession from "@/components/auth/AuthSession";
 import type {Metadata} from 'next'
+import {ProgressBarProvider} from "@/components/ProgressBarProvider";
 
 const noto_sans_kr = Noto_Sans_KR({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -26,15 +27,18 @@ export default function RootLayout({
     <html lang="ko" className={noto_sans_kr.className}>
       <body className="light overflow-y-scroll bg-slate-50 text-slate-900 antialiased ">
         <AuthSession>
-          <header>
-            <nav>
-              <NavBar />
-            </nav>
-          </header>
-          <main className="py-14 flex justify-center">
-            {authModal}
-            {children}
-          </main>
+          <ProgressBarProvider>
+            <header>
+              <nav>
+                <NavBar />
+              </nav>
+            </header>
+            <main className="py-14 flex justify-center">
+              {authModal}
+              {children}
+            </main>
+          </ProgressBarProvider>
+
         </AuthSession>
       </body>
     </html>
