@@ -13,7 +13,6 @@ export default function CommentInput({ postId }: Props) {
   const [value, setValue] = useState("");
   const [author, setAuthor] = useState("");
 
-  const router = useRouter();
   const session = useSession();
 
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
