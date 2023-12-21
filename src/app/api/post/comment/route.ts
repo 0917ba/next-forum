@@ -24,6 +24,7 @@ export async function POST(req: Request) {
     authorId,
     author,
     data,
+    createdAt: new Date().getTime(),
     _id: uid(),
   });
 
