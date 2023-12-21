@@ -87,7 +87,7 @@ export default async function Post({
               <div className="mb-2 text-sm">
                 작성자: <span className="underline">{author}</span>
               </div>
-              <div className="mb-0.5 text-sm text-zinc-400">
+              <div className="mb-0.5 text-sm text-zinc-400 sm:block hidden">
                 <span>{`${new Date(createdAt).toLocaleString()}`}</span>
               </div>
             </div>

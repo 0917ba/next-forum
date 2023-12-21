@@ -22,7 +22,7 @@ export default async function Comment({ comment }: { comment: Comment }) {
       <div className="mb-1 w-full flex justify-between relative">
           <div className={'text-sm flex gap-5'}>
               <span>작성자: <span className="underline">{author}</span></span>
-              <span className={'text-sm text-zinc-400'}>{`${new Date(createdAt).toLocaleString()}`}</span>
+              <span className={'text-sm text-zinc-400 sm:block hidden'}>{`${new Date(createdAt).toLocaleString()}`}</span>
           </div>
           {
               userId === authorId && <div className={'absolute top-0 right-0'}><CommentDeleteBtn id={_id} /></div>

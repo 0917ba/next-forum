@@ -22,7 +22,7 @@ export default async function PostVote({ postId, initialVote }: Props) {
   }
 
   return (
-    <div className="w-24 flex-none">
+    <div className="sm:w-24 w-[72px] flex-none">
       <PostVoteBtn
         postId={postId}
         userId={userId}

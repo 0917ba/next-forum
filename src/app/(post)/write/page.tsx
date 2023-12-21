@@ -48,11 +48,11 @@ export default function Write() {
   };
 
   return (
-    <div className="mb-10 flex justify-center">
-      <div className="mt-4 flex w-full flex-col gap-3 px-4 md:px-52">
+    <div className="mb-10 flex justify-center max-md:w-full">
+      <div className="mt-4 flex w-full flex-col gap-3 px-6 md:px-52">
         <h1 className="mb-3 text-3xl font-bold">글쓰기</h1>
         <div className="mb-10 flex justify-center rounded bg-white px-4 pt-10 shadow">
-          <div className="mx-16 flex w-[522.81px]  flex-col">
+          <div className="mx-16 flex md:w-[522.81px]  flex-col">
             <div className="mb-2 w-fit">
               <input
                 className="text-2xl font-extrabold focus:outline-none"
@@ -85,7 +85,7 @@ export default function Write() {
             <div className="flex flex-col gap-3">
               <h1 className="mb-3 text-3xl font-bold">미리보기</h1>
               <div className="mb-10 flex min-h-[12rem] justify-center rounded bg-white pb-8 pt-10 font-medium shadow">
-                <div className="min-w-[500px] max-w-2xl px-8 w-full">
+                <div className="max-w-2xl px-8 w-full">
                   <EditorJsRenderer data={data} title={title} preview={true} />
                 </div>
               </div>
