@@ -13,8 +13,11 @@ export default function PostDeleteBtn({ id }: { id: string }) {
       body: JSON.stringify({ id }),
     };
     await fetch("/api/post/delete", data);
+    alert("삭제되었습니다.")
     router.refresh();
     router.push("/");
+    // refresh
+    location.reload();
   };
   return <CoolButton onClick={onDelete}>삭제</CoolButton>;
 }

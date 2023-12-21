@@ -18,7 +18,7 @@ export default async function Page() {
   posts.sort((a: Post, b: Post) => b.createdAt - a.createdAt)
 
   return (
-    <div className="mx-20 h-max pt-4 lg:mx-52">
+    <div className="mx-20 h-max pt-4 lg:mx-52 max-w-2xl w-full">
       <h1 className="mb-6 text-3xl font-semibold text-zinc-800">글 목록</h1>
       <div className="grid grid-cols-3 gap-2.5">
         <div className="col-span-3 min-h-[12rem]">

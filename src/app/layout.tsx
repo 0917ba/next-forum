@@ -31,7 +31,7 @@ export default function RootLayout({
               <NavBar />
             </nav>
           </header>
-          <main className="py-14">
+          <main className="py-14 flex justify-center">
             {authModal}
             {children}
           </main>
