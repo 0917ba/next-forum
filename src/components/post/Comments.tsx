@@ -6,6 +6,7 @@ type Comment = {
   postId: string;
   author: string;
   data: string;
+  createdAt: number;
   _id: string;
 };
 

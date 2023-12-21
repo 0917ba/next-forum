@@ -40,7 +40,7 @@ export default function CommentInput({ postId }: Props) {
   };
 
   return (
-    <div className="min-h-[150px] w-full">
+    <div className="min-h-[150px] w-full mb-8">
       <h1 className="mb-2.5 text-lg font-semibold">댓글</h1>
       <div className="flex flex-col gap-2">
         <input
