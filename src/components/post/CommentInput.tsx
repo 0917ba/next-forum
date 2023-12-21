@@ -35,7 +35,9 @@ export default function CommentInput({ postId }: Props) {
     await fetch("/api/post/comment", formData);
     setValue("");
     setAuthor("");
-    router.refresh();
+    alert("등록되었습니다.");
+    // router.refresh();
+    location.reload();
   };
 
   return (
