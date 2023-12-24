@@ -9,6 +9,33 @@ export default function EmailSignUpSession() {
   const [username, setUsername] = useState("");
 
   const onLogin = async () => {
+    if (!email || !password || !username) {
+      alert("모든 항목을 입력해주세요.");
+      return;
+    }
+
+    // 비밀번호 형식이 아니면
+    // 비밀번호 형식: 숫자 or 문자, 8자 이상
+    const passwordPattern = /^[A-Za-z0-9]{8,}$/;
+    if (!passwordPattern.test(password)) {
+      alert("비밀번호는 숫자 또는 문자로 8자 이상이어야 합니다.");
+      return;
+    }
+
+    // 이메일 형식이 아니면
+    const pattern = /^[A-Za-z0-9_.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
+    if (!pattern.test(email)) {
+      alert("올바른 이메일 형식이 아닙니다.");
+      return;
+    }
+
+    // 닉네임 형식이 아니면
+    const usernamePattern = /^[가-힣a-zA-Z0-9]{2,10}$/;
+    if (!usernamePattern.test(username)) {
+      alert("닉네임은 한글, 영문, 숫자로 2자 이상 10자 이하여야 합니다.");
+      return;
+    }
+
     const formData = {
       method: "POST",
       headers: {
@@ -17,7 +44,11 @@ export default function EmailSignUpSession() {
       body: JSON.stringify({ email, password, username }),
     };
 
-    await fetch(`/api/users`, formData);
+    const res = await fetch(`/api/users`, formData).then((res) => res.json());
+    if (res?.status !== "ok") {
+      alert(res?.message);
+      return;
+    }
 
     await signIn("user-credentials", {
       email,

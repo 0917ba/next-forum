@@ -8,7 +8,6 @@ type Props = {
 };
 
 type VoteType = -1 | 0 | 1;
-
 export default async function PostVote({ postId, initialVote }: Props) {
   const session = await getServerSession(authOptions);
   const url = process.env.URL!;

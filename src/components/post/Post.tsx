@@ -6,6 +6,7 @@ import CoolLink from "../ui/CoolLink";
 import { authOptions } from "@/lib/auth";
 import EditorJsRenderer from "./EditorJsRenderer";
 import ExtendedCommentBar from "./ExtendedCommentBar";
+import connectDB from "@/lib/database";
 
 type Post = {
   _id: any;
@@ -30,48 +31,52 @@ export default async function Post({
   const { _id, authorId, title, author, data, createdAt, vote, comment } = post;
 
   // init vote count
-  // async function initVoteCount() {
-  //   const votes = await db
-  //     .collection("votes")
-  //     .find({ postId: post._id })
-  //     .toArray();
-  //
-  //   votes.forEach((_vote: any) => {
-  //     voteCount += _vote.voteType;
-  //   });
-  //
-  //   await db.collection("posts").updateOne(
-  //     { _id },
-  //     {
-  //       $set: {
-  //         vote: voteCount,
-  //       },
-  //     },
-  //   );
-  // }
-  //
-  // // init comment count
-  // async function initCommentCount() {
-  //   const comments = await db
-  //     .collection("comments")
-  //     .find({ postId: post._id })
-  //     .toArray();
-  //
-  //   comments.forEach((_comment: any) => {
-  //     commentCount += 1;
-  //   });
-  //
-  //   await db.collection("posts").updateOne(
-  //     { _id },
-  //     {
-  //       $set: {
-  //         comment: comments.length,
-  //       },
-  //     },
-  //   );
-  // }
-  //
-  // await Promise.all([initVoteCount(), initCommentCount()]);
+  const db = (await connectDB).db("forum");
+  async function initVoteCount() {
+    const votes = await db
+      .collection("votes")
+      .find({ postId: post._id })
+      .toArray();
+
+    let voteCount = 0;
+    votes.forEach((_vote: any) => {
+      voteCount += _vote.voteType;
+    });
+
+    await db.collection("posts").updateOne(
+      { _id },
+      {
+        $set: {
+          vote: voteCount,
+        },
+      },
+    );
+  }
+
+  // init comment count
+  async function initCommentCount() {
+    const comments = await db
+      .collection("comments")
+      .find({ postId: post._id })
+      .toArray();
+
+    let commentCount = 0;
+    comments.forEach((_comment: any) => {
+      commentCount += 1;
+    });
+
+    await db.collection("posts").updateOne(
+      { _id },
+      {
+        $set: {
+          comment: comments.length,
+        },
+      },
+    );
+  }
+
+  initCommentCount();
+  initVoteCount();
 
   return (
     <div className="flex flex-col content-between rounded-md bg-white shadow">
