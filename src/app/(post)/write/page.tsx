@@ -52,19 +52,19 @@ export default function Write() {
       <div className="mt-4 flex w-full flex-col gap-3 px-6 md:px-52">
         <h1 className="mb-3 text-3xl font-bold">글쓰기</h1>
         <div className="mb-10 flex justify-center rounded bg-white px-4 pt-10 shadow">
-          <div className="mx-16 flex flex-col  md:w-[522.81px]">
-            <div className="mb-2 w-fit">
+          <div className="mx-4 flex w-full flex-col md:mx-16 md:w-[522.81px]">
+            <div className="mb-2 w-full">
               <input
-                className="text-2xl font-extrabold focus:outline-none"
+                className="w-full text-2xl font-extrabold focus:outline-none"
                 name="title"
                 value={title}
                 onChange={onChange}
                 placeholder="제목"
               />
             </div>
-            <div className="mb-3 w-fit">
+            <div className="mb-3 w-full">
               <input
-                className="font-md text-sm underline focus:outline-none"
+                className="font-md w-full text-sm underline focus:outline-none"
                 name="author"
                 value={author}
                 onChange={onChange}
