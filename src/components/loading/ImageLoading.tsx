@@ -6,7 +6,7 @@ export default function ImageLoading() {
     >
       <div className="flex h-48 w-full items-center justify-center rounded bg-gray-200 sm:w-96">
         <svg
-          className="h-10 w-10 text-gray-200 dark:text-gray-600"
+          className="h-10 w-10 text-gray-200"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
