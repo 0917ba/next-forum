@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowBigDown, ArrowBigUp } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -50,6 +50,10 @@ export default function PostVoteBtn(props: Props) {
     };
     await fetch(`/api/posts/${postId}/votes/${userId}`, formData);
   };
+
+  useEffect(() => {
+    console.log(currentVote);
+  }, [currentVote]);
 
   const onVoteUp = async () => {
     if (!session?.data?.user) router.push("/signin");

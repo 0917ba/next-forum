@@ -23,11 +23,6 @@ export async function PUT(req: Request, { params }: Props) {
   const formData = await req.json();
   const { voteType, increment } = formData;
 
-  if (!formData.userId)
-    return new Response(
-      JSON.stringify({ status: "error", message: "User id is required" }),
-    );
-
   db.collection("posts").updateOne(
     { _id: postId },
     {
@@ -46,6 +41,8 @@ export async function PUT(req: Request, { params }: Props) {
     },
     { upsert: true },
   );
+
+  // console.log("voteType", voteType, "increment", increment);
 
   return new Response(JSON.stringify({ status: "ok" }));
 }
