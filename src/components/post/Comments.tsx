@@ -1,4 +1,6 @@
 import Comment from "@/components/post/Comment";
+import { Suspense } from "react";
+import ListLoading from "@/components/loading/ListLoading";
 
 type Comment = {
   authorId: string;
@@ -18,9 +20,11 @@ export default async function Comments({ postId }: { postId: string }) {
 
   return (
     <div className="flex flex-col gap-7">
-      {comments.map((comment: Comment) => (
-        <Comment key={comment._id} comment={comment} />
-      ))}
+      <Suspense fallback={<ListLoading />}>
+        {comments.map((comment: Comment) => (
+          <Comment key={comment._id} comment={comment} />
+        ))}
+      </Suspense>
     </div>
   );
 }
