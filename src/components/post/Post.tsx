@@ -85,7 +85,7 @@ export default async function Post({
         <div className="relative flex-1">
           <div className="my-5 mb-0.5 flex flex-col content-between">
             <div className="flex content-start gap-5">
-              <div className="mb-2 text-sm">
+              <div className="mb-5 text-sm sm:mb-2">
                 작성자: <span className="underline">{author}</span>
               </div>
               <div className="mb-0.5 hidden text-sm text-zinc-400 sm:block">
