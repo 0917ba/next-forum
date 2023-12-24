@@ -20,6 +20,8 @@ export async function POST(req: Request, { params }: Props) {
 
   await db.collection("posts").insertOne({
     _id: postId,
+    comment: 0,
+    vote: 0,
     ...formData,
     createdAt: new Date().getTime(),
   });
