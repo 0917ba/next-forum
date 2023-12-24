@@ -1,4 +1,5 @@
 import Post from "@/components/post/Post";
+import connectDB from "@/lib/database";
 
 type Post = {
   _id: any;
@@ -12,8 +13,12 @@ type Post = {
 };
 
 export default async function Page() {
-  const url = process.env.URL;
-  const posts = await fetch(`${url}/api/posts`).then((res) => res.json());
+  // Server Component should not fetch data from Route handler
+  const db = (await connectDB()).db("forum");
+  const posts: Post[] = await db.collection("posts").find().toArray();
+  // const url = process.env.URL;
+  // const posts = await fetch(`${url}/api/posts`).then((res) => res.json());
+  // console.log(posts);
   posts.sort((a: Post, b: Post) => b.createdAt - a.createdAt);
 
   return (

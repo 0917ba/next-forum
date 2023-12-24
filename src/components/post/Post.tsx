@@ -87,7 +87,7 @@ export default async function Post({
                 <span>{`${new Date(createdAt).toLocaleString()}`}</span>
               </div>
             </div>
-            `
+
             <EditorJsRenderer data={data} title={title} id={_id} />
           </div>
           {session?.user._id === authorId && (

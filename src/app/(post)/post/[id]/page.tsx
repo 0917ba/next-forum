@@ -1,6 +1,7 @@
 import Post from "@/components/post/Post";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import connectDB from "@/lib/database";
 
 type Post = {
   _id: any;
@@ -15,11 +16,12 @@ type Post = {
 
 export default async function Page({ params }: { params: { id: string } }) {
   const postId = params.id;
-  const url = process.env.URL!;
-  // const post: Post = await db.collection("posts").findOne({ _id: params.id });
-  const post: Post = await fetch(`${url}/api/posts/${postId}`).then((res) =>
-    res.json(),
-  );
+  // const url = process.env.URL!;
+  const db = (await connectDB()).db("forum");
+  const post: Post = await db.collection("posts").findOne({ _id: postId });
+  // const post: Post = await fetch(`${url}/api/posts/${postId}`).then((res) =>
+  // res.json(),
+  // );
 
   return (
     <div className="m-auto flex h-max w-full justify-center">

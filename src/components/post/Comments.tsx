@@ -10,7 +10,7 @@ type Comment = {
 };
 
 export default async function Comments({ postId }: { postId: string }) {
-  console.log("postId", postId);
+  // console.log("postId", postId);
   const url = process.env.URL!;
   const comments: Comment[] = await fetch(
     `${url}/api/posts/${postId}/comments`,
