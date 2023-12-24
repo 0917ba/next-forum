@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import connectDB from "@/lib/database";
 
-export default async function POST(req: Request) {
+export async function POST(req: Request) {
   const { username, email, password } = await req.json();
   const hash = await bcrypt.hash(password, 10);
 
