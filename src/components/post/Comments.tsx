@@ -1,4 +1,3 @@
-import connectDB from "@/lib/database";
 import Comment from "@/components/post/Comment";
 
 type Comment = {
@@ -10,14 +9,12 @@ type Comment = {
   _id: string;
 };
 
-export const dynamic = "force-dynamic";
-
 export default async function Comments({ postId }: { postId: string }) {
-  const db = (await connectDB).db("forum");
-  const comments: Comment[] = await db
-    .collection("comments")
-    .find({ postId })
-    .toArray();
+  console.log("postId", postId);
+  const url = process.env.URL!;
+  const comments: Comment[] = await fetch(
+    `${url}/api/posts/${postId}/comments`,
+  ).then((res) => res.json());
 
   return (
     <div className="flex flex-col gap-7">

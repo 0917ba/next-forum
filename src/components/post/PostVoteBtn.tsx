@@ -39,18 +39,16 @@ export default function PostVoteBtn(props: Props) {
     setCurrentVote((prev) => prev + increment);
 
     const formData = {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        postId,
-        userId,
         voteType: _currentType,
         increment,
       }),
     };
-    await fetch("/api/post/vote", formData);
+    await fetch(`/api/posts/${postId}/votes/${userId}`, formData);
   };
 
   const onVoteUp = async () => {

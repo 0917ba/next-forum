@@ -5,7 +5,6 @@ import PostVote from "./PostVote";
 import CoolLink from "../ui/CoolLink";
 import { authOptions } from "@/lib/auth";
 import EditorJsRenderer from "./EditorJsRenderer";
-import connectDB from "@/lib/database";
 import ExtendedCommentBar from "./ExtendedCommentBar";
 
 type Post = {
@@ -27,71 +26,68 @@ export default async function Post({
   extended?: boolean;
 }) {
   const session = await getServerSession(authOptions);
-  const db = (await connectDB).db("forum");
 
-  const { _id, authorId, title, author, data, createdAt } = post;
-  let voteCount = 0,
-    commentCount = 0;
+  const { _id, authorId, title, author, data, createdAt, vote, comment } = post;
 
   // init vote count
-  async function initVoteCount() {
-    const votes = await db
-      .collection("votes")
-      .find({ postId: post._id })
-      .toArray();
-
-    votes.forEach((_vote: any) => {
-      voteCount += _vote.voteType;
-    });
-
-    await db.collection("posts").updateOne(
-      { _id },
-      {
-        $set: {
-          vote: voteCount,
-        },
-      },
-    );
-  }
-
-  // init comment count
-  async function initCommentCount() {
-    const comments = await db
-      .collection("comments")
-      .find({ postId: post._id })
-      .toArray();
-
-    comments.forEach((_comment: any) => {
-      commentCount += 1;
-    });
-
-    await db.collection("posts").updateOne(
-      { _id },
-      {
-        $set: {
-          comment: comments.length,
-        },
-      },
-    );
-  }
-
-  await Promise.all([initVoteCount(), initCommentCount()]);
+  // async function initVoteCount() {
+  //   const votes = await db
+  //     .collection("votes")
+  //     .find({ postId: post._id })
+  //     .toArray();
+  //
+  //   votes.forEach((_vote: any) => {
+  //     voteCount += _vote.voteType;
+  //   });
+  //
+  //   await db.collection("posts").updateOne(
+  //     { _id },
+  //     {
+  //       $set: {
+  //         vote: voteCount,
+  //       },
+  //     },
+  //   );
+  // }
+  //
+  // // init comment count
+  // async function initCommentCount() {
+  //   const comments = await db
+  //     .collection("comments")
+  //     .find({ postId: post._id })
+  //     .toArray();
+  //
+  //   comments.forEach((_comment: any) => {
+  //     commentCount += 1;
+  //   });
+  //
+  //   await db.collection("posts").updateOne(
+  //     { _id },
+  //     {
+  //       $set: {
+  //         comment: comments.length,
+  //       },
+  //     },
+  //   );
+  // }
+  //
+  // await Promise.all([initVoteCount(), initCommentCount()]);
 
   return (
     <div className="flex flex-col content-between rounded-md bg-white shadow">
       <div className="flex grow pr-4">
-        <PostVote postId={_id} initialVote={voteCount} />
+        <PostVote postId={_id} initialVote={vote} />
         <div className="relative flex-1">
           <div className="my-5 mb-0.5 flex flex-col content-between">
-            <div className='flex content-start gap-5'>
+            <div className="flex content-start gap-5">
               <div className="mb-2 text-sm">
                 작성자: <span className="underline">{author}</span>
               </div>
-              <div className="mb-0.5 text-sm text-zinc-400 sm:block hidden">
+              <div className="mb-0.5 hidden text-sm text-zinc-400 sm:block">
                 <span>{`${new Date(createdAt).toLocaleString()}`}</span>
               </div>
             </div>
-
+            `
             <EditorJsRenderer data={data} title={title} id={_id} />
           </div>
           {session?.user._id === authorId && (
@@ -105,7 +101,7 @@ export default async function Post({
       {extended ? (
         <ExtendedCommentBar postId={_id} />
       ) : (
-        <CommentBar commentCount={commentCount} />
+        <CommentBar commentCount={comment} />
       )}
     </div>
   );

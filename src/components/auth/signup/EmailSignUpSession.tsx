@@ -9,13 +9,16 @@ export default function EmailSignUpSession() {
   const [username, setUsername] = useState("");
 
   const onLogin = async () => {
-    await fetch("/api/signup", {
+    const formData = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password, username }),
-    });
+    };
+
+    await fetch(`/api/users`, formData);
+
     await signIn("user-credentials", {
       email,
       password,

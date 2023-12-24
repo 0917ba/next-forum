@@ -3,7 +3,6 @@
 import { ChangeEvent, useState } from "react";
 import CoolButton from "../ui/CoolButton";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 type Props = {
   postId: string;
@@ -26,12 +25,11 @@ export default function CommentInput({ postId }: Props) {
       },
       body: JSON.stringify({
         authorId: session?.data?.user._id,
-        postId,
         author,
         data: value,
       }),
     };
-    await fetch("/api/post/comment", formData);
+    await fetch(`/api/posts/${postId}/comments`, formData);
     setValue("");
     setAuthor("");
     alert("등록되었습니다.");
@@ -40,7 +38,7 @@ export default function CommentInput({ postId }: Props) {
   };
 
   return (
-    <div className="min-h-[150px] w-full mb-8">
+    <div className="mb-8 min-h-[150px] w-full">
       <h1 className="mb-2.5 text-lg font-semibold">댓글</h1>
       <div className="flex flex-col gap-2">
         <input

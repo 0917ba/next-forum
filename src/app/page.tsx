@@ -1,5 +1,4 @@
 import Post from "@/components/post/Post";
-import connectDB from "@/lib/database";
 
 type Post = {
   _id: any;
@@ -13,12 +12,12 @@ type Post = {
 };
 
 export default async function Page() {
-  const db = (await connectDB).db("forum");
-  const posts = await db.collection("posts").find().toArray();
-  posts.sort((a: Post, b: Post) => b.createdAt - a.createdAt)
+  const url = process.env.URL;
+  const posts = await fetch(`${url}/api/posts`).then((res) => res.json());
+  posts.sort((a: Post, b: Post) => b.createdAt - a.createdAt);
 
   return (
-    <div className=" md:mx-0 mx-8 h-max pt-4 max-w-2xl w-full">
+    <div className=" mx-8 h-max w-full max-w-2xl pt-4 md:mx-0">
       <h1 className="mb-6 text-3xl font-semibold text-zinc-800">글 목록</h1>
       <div className="grid grid-cols-3 gap-2.5">
         <div className="col-span-3 min-h-[12rem]">
