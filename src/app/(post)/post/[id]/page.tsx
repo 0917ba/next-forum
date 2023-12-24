@@ -17,7 +17,7 @@ type Post = {
 export default async function Page({ params }: { params: { id: string } }) {
   const postId = params.id;
   // const url = process.env.URL!;
-  const db = (await connectDB()).db("forum");
+  const db = (await connectDB).db("forum");
   const post: Post = await db.collection("posts").findOne({ _id: postId });
   // const post: Post = await fetch(`${url}/api/posts/${postId}`).then((res) =>
   // res.json(),

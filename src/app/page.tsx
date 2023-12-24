@@ -14,7 +14,7 @@ type Post = {
 
 export default async function Page() {
   // Server Component should not fetch data from Route handler
-  const db = (await connectDB()).db("forum");
+  const db = (await connectDB).db("forum");
   const posts: Post[] = await db.collection("posts").find().toArray();
   // const url = process.env.URL;
   // const posts = await fetch(`${url}/api/posts`).then((res) => res.json());
