@@ -1,5 +1,6 @@
 import Post from "@/components/post/Post";
 import connectDB from "@/lib/database";
+import { cache } from "react";
 
 type Post = {
   _id: any;
@@ -12,14 +13,20 @@ type Post = {
   createdAt: number;
 };
 
-export default async function Page() {
-  // Server Component should not fetch data from Route handler
+const getPosts = cache(async () => {
   const db = (await connectDB).db("forum");
-  const posts: Post[] = await db.collection("posts").find().toArray();
-  // const url = process.env.URL;
-  // const posts = await fetch(`${url}/api/posts`).then((res) => res.json());
-  // console.log(posts);
-  posts.sort((a: Post, b: Post) => b.createdAt - a.createdAt);
+  const posts: Post[] = await db
+    .collection("posts")
+    .find()
+    .sort({ createdAt: -1 })
+    .toArray();
+  return posts;
+});
+
+export const revalidate = 10;
+
+export default async function Page() {
+  const posts = await getPosts();
 
   return (
     <div className=" mx-8 h-max w-full max-w-2xl pt-4 md:mx-0">
