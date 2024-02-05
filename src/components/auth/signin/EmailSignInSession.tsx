@@ -1,14 +1,12 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 export default function EmailSignInSession() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const router = useRouter();
 
   const onLogin = async () => {
     const result = await signIn("user-credentials", {
@@ -41,7 +39,7 @@ export default function EmailSignInSession() {
         name="email"
         onChange={onChange}
         value={email}
-        className="h-8 w-52 rounded-sm bg-slate-200 text-sm"
+        className="h-8 w-52 rounded-sm bg-slate-200 text-sm px-1.5"
         placeholder="이메일"
       />
       <input
@@ -49,7 +47,7 @@ export default function EmailSignInSession() {
         type="password"
         onChange={onChange}
         value={password}
-        className="h-8 w-52 rounded-sm bg-slate-200 text-sm"
+        className="h-8 w-52 rounded-sm bg-slate-200 text-sm px-1.5"
         placeholder="비밀번호"
       />
       <button

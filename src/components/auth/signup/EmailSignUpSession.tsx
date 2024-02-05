@@ -77,14 +77,14 @@ export default function EmailSignUpSession() {
         name="username"
         onChange={onChange}
         value={username}
-        className="h-8 w-52 rounded-sm bg-slate-200 text-sm"
+        className="h-8 w-52 rounded-sm bg-slate-200 text-sm px-1.5"
         placeholder="닉네임"
       />
       <input
         name="email"
         onChange={onChange}
         value={email}
-        className="h-8 w-52 rounded-sm bg-slate-200 text-sm"
+        className="h-8 w-52 rounded-sm bg-slate-200 text-sm px-1.5"
         placeholder="이메일"
       />
       <input
@@ -92,7 +92,7 @@ export default function EmailSignUpSession() {
         type="password"
         onChange={onChange}
         value={password}
-        className="h-8 w-52 rounded-sm bg-slate-200 text-sm"
+        className="h-8 w-52 rounded-sm bg-slate-200 text-sm px-1.5"
         placeholder="비밀번호"
       />
       <button
