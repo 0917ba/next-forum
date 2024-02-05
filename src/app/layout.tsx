@@ -27,19 +27,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className={noto_sans_kr.className}>
-      <body className="light overflow-y-scroll bg-slate-50 text-slate-900 antialiased ">
-        <AuthSession>
-          <header>
-            <nav>
-              <NavBar />
-            </nav>
-          </header>
-          <main className="flex justify-center py-14">
-            {authModal}
-            {children}
-          </main>
-        </AuthSession>
-      </body>
+    <link
+      rel="icon"
+      href="/icon?<generated>"
+      type="image/<generated>"
+      sizes="<generated>"
+    />
+    <body className="light overflow-y-scroll bg-slate-50 text-slate-900 antialiased ">
+    <AuthSession>
+      <header>
+        <nav>
+          <NavBar/>
+        </nav>
+      </header>
+      <main className="flex justify-center py-14">
+        {authModal}
+        {children}
+      </main>
+    </AuthSession>
+    </body>
     </html>
   );
 }
