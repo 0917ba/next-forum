@@ -3,6 +3,7 @@ import "./globals.css";
 import { Noto_Sans_KR } from "next/font/google";
 import AuthSession from "@/components/auth/AuthSession";
 import type { Metadata } from "next";
+import React from "react";
 
 const noto_sans_kr = Noto_Sans_KR({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -11,8 +12,8 @@ const noto_sans_kr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: "인곽게시판😃",
-  description: "인천과학고 커뮤니티 게시판",
+  title: "익명게시판😃",
+  description: "woojin029가 만든 익명 커뮤니티 게시판",
 };
 
 export const revalidate = 5;
